@@ -44,7 +44,7 @@ app.JsLog = (function()
 
     _init:function()
     {
-      console.log('JsLog.init()');
+      console.log('JsLog._init()');
 
       jsLogElement = document.querySelector('#jsLog');
       jsTextInputElement = document.querySelector('#jsTextInput');

@@ -64,6 +64,8 @@ package com.beachfrontMedia
 			_bnLogMessageFlash = new PushButton(this, _tfLogInput.x + _tfLogInput.width + 10, _tfLogInput.y + 3, 'Log Message (Flash)');
 			_bnLogMessageJS = new PushButton(this, _bnLogMessageFlash.x + _bnLogMessageFlash.width + 10, _tfLogInput.y + 3, 'Log Message (JS)');
 			
+			_bnLogMessageFlash.height = _bnLogMessageJS.height = _tfLogInput.height;
+			
 			_bnLogMessageFlash.addEventListener(MouseEvent.CLICK, _onBnLogMessageFlashClick, false, 0, true);
 			_bnLogMessageJS.addEventListener(MouseEvent.CLICK, _onBnLogMessageJSClick, false, 0, true);
 		}
