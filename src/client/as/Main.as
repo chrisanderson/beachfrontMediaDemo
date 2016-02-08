@@ -2,6 +2,7 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.display.StageAlign;
 	import com.beachfrontMedia.App;
 	
 	/**
@@ -28,6 +29,8 @@ package
 			{
 				removeEventListener(Event.ADDED_TO_STAGE, _init);
 			}
+			
+			stage.align = StageAlign.TOP_LEFT;
 			
 			stage.addChild(new App());
 		}

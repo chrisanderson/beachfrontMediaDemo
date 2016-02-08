@@ -3,6 +3,36 @@
 var app = {};
 var globalMessage = 'global message (JS)';
 
+$(function()
+{
+  $.getScript('/js/JsLog.js')
+    .done(function(result, status)
+    {
+      app.JsLog._init();
+
+      console.log(app.JsLog.logMessage(globalMessage));
+      console.log(app.JsLog.logMessage(app.JsLog.exposedMessage));
+    })
+    .fail(function(xhr, settings, error)
+    {
+      //
+    });
+
+  $.getScript('/js/JqueryExample.js')
+    .done(function(result, status)
+    {
+      app.JqueryExample._init();
+
+      var tempList = [{id:0, name:'test33'}, {id:1, name:'test34'}, {id:2, name:'test35'}];
+
+      app.JqueryExample.logList(tempList);
+    })
+    .fail(function(xhr, settings, error)
+    {
+      //
+    });
+});
+
 //demoing a non-exposed iife to keep some methods and props scoped locally
 (function()
 {
@@ -15,7 +45,7 @@ var globalMessage = 'global message (JS)';
     ,allowFullscreen:"true"
     ,allowScriptAccess:"always"
     ,bgcolor:"#f0f0f0"
-    ,wmode:"direct"//can cause issues with FP settings & webcam
+    ,wmode:"direct"
   };
 
   var attributes = {
@@ -25,54 +55,7 @@ var globalMessage = 'global message (JS)';
 
   swfobject.embedSWF(
     "swf/app.swf"
-    ,"swfContainer", "400", "300", "10.0.0"
+    ,"swfContainer", "400", "300", "18"
     ,"expressInstall.swf"
     ,flashvars, params, attributes);
 }());
-
-
-//exposed iife to keep some methods and props scoped locally but still accessible to the global scope
-app.JsLog = (function()
-{
-  var localMessage = 'local message (JS)';
-  var jsLogElement;
-  var jsTextInputElement;
-  var jsLogButtonElement;
-
-  return{
-    exposedMessage:'exposed message (JS)',
-
-    _init:function()
-    {
-      console.log('JsLog._init()');
-
-      jsLogElement = document.querySelector('#jsLog');
-      jsTextInputElement = document.querySelector('#jsTextInput');
-      jsLogButtonElement = document.querySelector('#jsLogButton');
-
-      this.logMessage(localMessage);
-    },
-
-    logMessage:function(message)
-    {
-      message = message || '';
-
-      console.log('JsLog.logMessage() message: ' + message);
-
-      var tempMessage = 'JsLog.logMessage() message: ' + message + '<br/>';
-
-      jsLogElement.innerHTML += tempMessage;
-
-      return tempMessage;
-    },
-
-    onLogButtonClick:function()
-    {
-      this.logMessage(jsTextInputElement.value + ' (JS)');
-    }
-  };
-}());
-app.JsLog._init();
-
-console.log(app.JsLog.logMessage(globalMessage));
-console.log(app.JsLog.logMessage(app.JsLog.exposedMessage));
