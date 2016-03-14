@@ -5,7 +5,7 @@ var globalMessage = 'global message (JS)';
 
 $(function()
 {
-  $.getScript('/js/JsLog.js')
+  $.getScript('js/JsLog.js')
     .done(function(result, status)
     {
       app.JsLog._init();
@@ -18,7 +18,7 @@ $(function()
       //
     });
 
-  $.getScript('/js/JqueryExample.js')
+  $.getScript('js/JqueryExample.js')
     .done(function(result, status)
     {
       app.JqueryExample._init();
